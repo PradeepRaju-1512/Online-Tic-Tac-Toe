@@ -8,12 +8,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Locate SQLite3 on the host machine
 find_package(SQLite3 REQUIRED)
 
-# Define the source files for the backend executable
+# Define ALL the source files for the backend executable
 add_executable(Server
     backend/main.cpp
     backend/Database.cpp
     backend/Board.cpp
-    # We will add Player.cpp, GameSession.cpp, and Auth.cpp here in the next step
+    backend/Player.cpp
+    backend/GameSession.cpp
+    backend/User.cpp
+    backend/Auth.cpp
 )
 
 # Link the SQLite3 library and standard threading
