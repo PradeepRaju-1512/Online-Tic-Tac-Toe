@@ -1,0 +1,52 @@
+.game-container {
+    background-color: #1e1e1e;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    margin: 20px auto;
+    background-color: #333;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.cell {
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cell:hover {
+    background-color: #2a2a2a;
+}
+
+.cell.taken {
+    cursor: not-allowed;
+}
+
+.cell.x {
+    color: #ff5252;
+}
+
+.cell.o {
+    color: #4CAF50;
+}
+
+#game-status {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
