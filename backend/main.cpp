@@ -61,7 +61,7 @@ int main() {
     .onopen([&](crow::websocket::connection& conn) {
         CROW_LOG_INFO << "New WebSocket connection established.";
     })
-    .onclose([&](crow::websocket::connection& conn, const std::string& reason) {
+    .onclose([&](crow::websocket::connection& conn, const std::string& reason, uint16_t code) {
         std::string connId = std::to_string(reinterpret_cast<uintptr_t>(&conn));
         std::lock_guard<std::mutex> lock(gamesMutex);
         
