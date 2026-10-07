@@ -1,4 +1,4 @@
-# Online-Tic-Tac-Toe-
+# Online-Tic-Tac-Toe
 251144, 251120  -- Assignment
 
 # Online Multiplayer Tic-Tac-Toe
