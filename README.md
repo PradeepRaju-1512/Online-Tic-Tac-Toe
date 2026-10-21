@@ -1,9 +1,5 @@
 # Online Multiplayer Tic-Tac-Toe
-Project by 251120 and 251144
-
-This project is an online multiplayer Tic-Tac-Toe game made using **C++ and a web frontend**.
-
-The main idea of the project is to allow two players to connect to the same game room and play Tic-Tac-Toe in real time. The C++ server handles the actual game logic while the frontend is used to display the game and interact with the players.
+This repository consists of a game of Tic-Tac-Toe which is used to play with other users through server which is created by C++.
 
 ## Features
 | Feature | Description |
@@ -20,7 +16,7 @@ The main idea of the project is to allow two players to connect to the same game
 | Connection Status | Shows when a player connects or leaves |
 | Winning Highlight | Shows the winning cells |
 
-## Technologies Used
+## Programming languages and applications used
 
 | Technology | Used For |
 |---|---|
@@ -213,7 +209,7 @@ A new game does not start when only one player clicks it.
       Start the new game.
 ```
 
-## Game Flow
+## Game Flow(flowchart to start and play a game)
 
 ```text
 Start
@@ -284,15 +280,6 @@ It checks:
 
 This prevents a player from simply changing the board using the browser.
 
-## Running the Project
-
-Clone the repository:
-
-```bash
-git clone <repository-url>
-cd TicTacToe
-```
-
 Build the C++ server using the project's build setup.
 
 Start the server:
@@ -303,16 +290,12 @@ Start the server:
 
 Then open the frontend and connect it to the server.
 
-## Testing With Two Devices
-
-For testing on the same network:
-
+Steps required by the user to play the game with others are as follows:
 1. Start the C++ server.
-2. Find the computer's local IP address.
-3. Connect both devices to the same network.
-4. Open the frontend on both devices.
-5. Player 1 creates a room.
-6. Player 2 enters the room code.
-7. Start playing.
-
-The main purpose of this project is to learn how a **C++ server and a web frontend can work together to create a real-time multiplayer game**.
+2. Make sure both the devices are connected to the same network.
+3. You can either create a room or join other players room through room code.
+4. If you are the room creator then send the room code to the other player(You are player-1 and the other user is player-2).
+5. If you are not the room creator then join the room of other user by entering their room code(You are player-2 and the other user is player-1).
+6. Both the users are required to agree for starting a match.
+7. After the match has ended rematch can be played if both the users select the rematch option.
+8. You can exit from a room by using the exit option on display.If it is used in between match then the other player is declared as winner.
