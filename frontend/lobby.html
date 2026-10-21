@@ -1,22 +1,71 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lobby - C++ Tic-Tac-Toe</title>
-    <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tic Tac Toe-Room Lobby</title>
+<link rel="stylesheet" href="lobby.css">
 </head>
 <body>
-    <div class="container">
-        <h1 id="welcome-message">Welcome</h1>
-        <div class="stats-panel">
-            <p>Ready to play?</p>
-        </div>
-        <button id="find-match-btn">Find Match</button>
-        <p id="lobby-status"></p>
-        <button id="logout-btn" style="background-color: #f44336; margin-top: 1rem;">Logout</button>
-    </div>
+<div class="container">
+<header>
+<h1>TIC TAC TOE</h1>
+<span id="connectionStatus">Connecting...</span>
+</header>
+<!--Frontend related to server and whether the user is connected to server or not.-->
+<main>
+<section class="room-panel">
+<div class="room-header">
+<div>
+<p class="label">ROOM ID</p>
+<div class="room-id-row">
+<h2 id="roomId">------</h2>
+<button id="copyBtn">Copy</button>
+</div>
+</div>
+<button id="leaveBtn" class="leave-btn">Leave Room</button>
+</div>
+<!--Frontend related to room-->
+<h3>Players in this room</h3>
+<p class="description">Waiting for both players to get ready.</p>
+<!--Checking if both the users are inside the room or not-->
+<div class="player">
+<div class="symbol x">X</div>
+<div class="player-details">
+<strong id="playerXName">Waiting for host...</strong>
+<span>Host·Player X</span>
+</div>
+<span id="playerXStatus" class="status">Waiting</span>
+</div>
+<div class="player">
+<div class="symbol o">O</div>
+<div class="player-details">
+<strong id="playerOName">Waiting for opponent...</strong>
+<span>Opponent · Player O</span>
+</div>
+<span id="playerOStatus" class="status">Waiting</span>
+</div>
+<!--Assigning symbols to each user for playing the game.-->
+<div id="roomMessage" class="message">
+Share your Room ID with the other player(player-2).
+</div>
+<div class="edit-section">
+<button id="editBtn" class="edit-btn">Edit Username</button>
+<form id="editForm" class="hidden">
+<label for="newUsername">New username</label>
+<div class="input-row">
+<input id="newUsername" maxlength="20" required placeholder="Enter username">
+<button type="submit">Save</button>
+</div>
+</form>
+</div>
+</section>
+</main>
+<!--Frontend related to username of the user for playing the game and saving the username-->
+<footer>Local multiplayer · C++ Crow Server</footer>
+</div>
 
-    <script src="js/lobby.js" defer></script>
+<script src="lobby.js"></script>
 </body>
 </html>
