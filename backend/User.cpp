@@ -1,24 +1,18 @@
 #include "User.h"
-
-User::User(const std::string& user, int w, int l) 
-    : username(user), wins(w), losses(l) {}
-
-std::string User::getUsername() const { 
-    return username; 
+User::User(){
+    id=0;
+    username="";
 }
-
-int User::getWins() const { 
-    return wins; 
+User::User(int id,string username){
+    this->id=id;
+    this->username=username;
 }
-
-int User::getLosses() const { 
-    return losses; 
+int User::getId() const{
+    return id;
 }
-
-void User::addWin() { 
-    wins++; 
+string User::getUsername() const{
+    return username;
 }
-
-void User::addLoss() { 
-    losses++; 
+void User::setUsername(string username){
+    this->username=username;
 }
