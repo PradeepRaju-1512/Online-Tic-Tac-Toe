@@ -1,18 +1,22 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 #include <string>
-
-class Player {
+using namespace std;
+class Player{
 private:
-    std::string username;
-    std::string connectionId; // Unique handle for the active WebSocket connection
-    char symbol;              // 'X' or 'O'
-
+    string username;
+    string token;
+    char symbol;
+    bool connected;
 public:
-    // Constructor initializes the player with their connection details
-    Player(const std::string& user, const std::string& connId, char sym);
-
-    // Getters for player metadata
-    std::string getUsername() const;
-    std::string getConnectionId() const;
+    Player();
+    Player(string username,string token,char symbol);
+    string getUsername() const;
+    string getToken() const;
     char getSymbol() const;
+    bool isConnected() const;
+    void setUsername(string username);
+    void setSymbol(char symbol);
+    void setConnected(bool connected);
 };
+#endif
