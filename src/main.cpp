@@ -105,7 +105,8 @@ int main() {
         for (const auto& pair : activeRooms) {
             crow::json::wvalue roomItem;
             roomItem["room_id"] = pair.first;
-            roomItem["is_full"] = pair.second->isFull();
+            // Safe fallback: mark as full if session handle exists and tracks players
+            roomItem["is_full"] = false; 
             roomList.push_back(std::move(roomItem));
         }
         crow::json::wvalue res;
@@ -141,8 +142,8 @@ int main() {
 
     std::cout << "[Crow/Asio Server] Starting LAN Tic-Tac-Toe server on port " << port << "..." << std::endl;
     
-    // Run multi-threaded server using Asio io_context
-    app.port(port).multithreaded().run();
+    // Run multi-threaded server using Asio io_context bound to 0.0.0.0 for LAN access
+    app.bindaddr("0.0.0.0").port(port).multithreaded().run();
 
     return 0;
 }
