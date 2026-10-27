@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAN Tic-Tac-Toe Network</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="purple">
+
+  <!-- HEADER -->
+  <header class="rgb-animate">
+    <div class="logo-container">
+      <div class="logo-icon">#</div>
+      <div class="logo-title">LAN Tic-Tac-Toe Engine</div>
+    </div>
+    <div class="header-controls">
+      <select class="theme-select" id="themeSelect" onchange="changeTheme(this.value)">
+        <option value="purple">Purple, Black & White</option>
+        <option value="blue">Electric Blue & Dark Cyan</option>
+        <option value="green">Matrix & Emerald Green</option>
+        <option value="orange">Cyberpunk Amber & Orange</option>
+        <option value="greyscale">Clean Greyscale</option>
+        <option value="rgb">RGB Spectrum (Animated)</option>
+      </select>
+      <button class="btn-db" onclick="openModal('dbModal')">
+        <span>PostgreSQL DB</span>
+      </button>
+    </div>
+    <div class="status-group">
+      <div class="status-badge" title="C++ Crow Server Status">
+        <div class="status-dot online" id="serverDot"></div>
+        <span id="serverStatusText">Server Online</span>
+      </div>
+      <div class="status-badge" title="Database Status">
+        <div class="status-dot online" id="dbDot"></div>
+        <span id="dbStatusText">Database Online</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <div class="main-container">
+    
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+      <div class="card rgb-animate">
+        <div class="card-title"><span>Player Profile</span></div>
+        <div class="input-group">
+          <label>Display Name</label>
+          <input type="text" class="input-control" id="usernameInput" value="Player_One" onchange="updateUsername(this.value)">
+        </div>
+      </div>
+
+      <div class="card rgb-animate">
+        <div class="card-title"><span>Single Player</span></div>
+        <p style="font-size: 17px; color: var(--text-muted); margin-bottom: 16px; font-weight: 700;">Practice against AI Bot.</p>
+        <button class="btn" onclick="openModal('botModal')">Play against AI Bot</button>
+      </div>
+
+      <div class="card rgb-animate">
+        <div class="card-title"><span>LAN Rooms</span></div>
+        <div style="display: flex; gap: 12px; margin-bottom: 18px;">
+          <input type="text" class="input-control" id="customRoomInput" placeholder="Room ID">
+          <button class="btn btn-sm" onclick="createRoom()">Host</button>
+        </div>
+        <div style="font-size: 14px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px;">Available Rooms</div>
+        <div class="room-list" id="roomList">
+          <div class="room-item" id="roomItem-ROOM_774">
+            <div class="room-info">
+              <span class="room-id">ROOM_774</span>
+              <span class="room-host" id="roomStatus-ROOM_774">Status: Available</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="roomBtn-ROOM_774" onclick="joinRoom('ROOM_774')">Join</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME AREA -->
+    <div class="game-area">
+      <div class="game-status-header rgb-animate">
+        <div class="player-card">
+          <div class="player-avatar x" id="p1Avatar">X</div>
+          <div class="player-info">
+            <span class="player-name" id="p1Name">Player_One</span>
+            <span class="player-role" id="p1Role">You (Token X) | Wins: <strong id="p1Score" style="color: var(--x-color);">0</strong></span>
+          </div>
+        </div>
+        <div class="turn-indicator" id="turnIndicator">YOUR TURN</div>
+        <div class="player-card" style="text-align: right; flex-direction: row-reverse;">
+          <div class="player-avatar o" id="p2Avatar">O</div>
+          <div class="player-info">
+            <span class="player-name" id="p2Name">Waiting...</span>
+            <span class="player-role" id="p2Role">Opponent | Wins: <strong id="p2Score" style="color: var(--o-color);">0</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="board-container">
+        <div class="tic-tac-toe-board" id="board">
+          <div class="board-cell" onclick="handleCellClick(0)" id="cell-0"></div>
+          <div class="board-cell" onclick="handleCellClick(1)" id="cell-1"></div>
+          <div class="board-cell" onclick="handleCellClick(2)" id="cell-2"></div>
+          <div class="board-cell" onclick="handleCellClick(3)" id="cell-3"></div>
+          <div class="board-cell" onclick="handleCellClick(4)" id="cell-4"></div>
+          <div class="board-cell" onclick="handleCellClick(5)" id="cell-5"></div>
+          <div class="board-cell" onclick="handleCellClick(6)" id="cell-6"></div>
+          <div class="board-cell" onclick="handleCellClick(7)" id="cell-7"></div>
+          <div class="board-cell" onclick="handleCellClick(8)" id="cell-8"></div>
+        </div>
+      </div>
+
+      <div class="controls-row">
+        <button class="btn btn-primary" onclick="requestRematch()">Rematch</button>
+        <button class="btn btn-secondary" onclick="swapSymbols()">Swap symbols</button>
+        <button class="btn btn-danger" onclick="exitRoom()">Exit Room</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="botModal">
+    <div class="modal-content rgb-animate">
+      <div class="modal-header">
+        <div class="modal-title">Configure AI Opponent</div>
+        <button class="modal-close" onclick="closeModal('botModal')">&times;</button>
+      </div>
+      <div class="input-group" style="margin-bottom: 20px;">
+        <label>AI Difficulty</label>
+        <select class="theme-select" id="aiDifficulty" style="width: 100%;">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="unbeatable" selected>Unbeatable (Minimax)</option>
+        </select>
+      </div>
+      <button class="btn" onclick="startBotGame()">Start Match vs Bot</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="rematchModal">
+    <div class="modal-content rgb-animate" style="max-width: 450px; text-align: center;">
+      <div class="modal-header" style="justify-content: center;">
+        <div class="modal-title">Rematch Request</div>
+      </div>
+      <p id="rematchModalText" style="font-size: 17px; color: var(--text-muted); font-weight: 600; margin: 10px 0;">
+        Your opponent has requested a rematch. Do you agree?
+      </p>
+      <div style="display: flex; gap: 14px; margin-top: 10px;" id="rematchButtons">
+        <button class="btn" onclick="acceptRematch()" style="background: var(--status-online);">Agree</button>
+        <button class="btn btn-danger" onclick="declineRematch()">Exit Room</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="dbModal">
+    <div class="modal-content rgb-animate" style="max-width: 700px;">
+      <div class="modal-header">
+        <div class="modal-title">PostgreSQL Database Records</div>
+        <button class="modal-close" onclick="closeModal('dbModal')">&times;</button>
+      </div>
+      <div class="db-terminal" id="dbTerminal">
+        <div>[PostgreSQL] Connected via environment variables...</div>
+      </div>
+      <button class="btn btn-secondary" onclick="refreshDBLogs()">Refresh DB State</button>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="script.js"></script>
+</body>
+</html>

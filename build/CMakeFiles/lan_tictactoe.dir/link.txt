@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/lan_tictactoe.dir/link.d CMakeFiles/lan_tictactoe.dir/src/Board.cpp.o CMakeFiles/lan_tictactoe.dir/src/Database.cpp.o CMakeFiles/lan_tictactoe.dir/src/GameSession.cpp.o CMakeFiles/lan_tictactoe.dir/src/main.cpp.o -o lan_tictactoe  -lpqxx

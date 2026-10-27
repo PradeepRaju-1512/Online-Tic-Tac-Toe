@@ -1,0 +1,57 @@
+﻿D:\msys64\ucrt64\bin\g++.exe : In file included from 
+third_party\Crow\include/crow.h:2,
+At line:1 char:42
++ ... c-Tac-Toe'; D:\msys64\ucrt64\bin\g++.exe -std=c++17 
+-isystem 'D:/msys ...
++                 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (In file include. 
+   ..clude/crow.h:2,:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+                 from src\main.cpp:1:
+third_party\Crow\include/crow/query_string.h:3:10: fatal 
+error: stdio.h: No such file or directory
+    3 | #include <stdio.h>
+      |          ^~~~~~~~~
+compilation terminated.
+In file included from 
+D:/msys64/ucrt64/include/c++/15.2.0/bits/postypes.h:42,
+                 from 
+D:/msys64/ucrt64/include/c++/15.2.0/bits/char_traits.h:44,
+                 from 
+D:/msys64/ucrt64/include/c++/15.2.0/string:44,
+                 from include/Database.h:2,
+                 from src\Database.cpp:1:
+D:/msys64/ucrt64/include/c++/15.2.0/cwchar:49:10: fatal 
+error: wchar.h: No such file or directory
+   49 | #include <wchar.h>
+      |          ^~~~~~~~~
+compilation terminated.
+In file included from 
+D:/msys64/ucrt64/include/c++/15.2.0/cstddef:52,
+                 from 
+D:/msys64/ucrt64/include/c++/15.2.0/bits/memory_resource.h:40,
+                 from 
+D:/msys64/ucrt64/include/c++/15.2.0/vector:91,
+                 from include/Board.h:2,
+                 from include/GameSession.h:2,
+                 from src\GameSession.cpp:1:
+D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/std
+def.h:1:15: fatal error: stddef.h: No such file or directory
+    1 | #include_next <stddef.h>
+      |               ^~~~~~~~~~
+compilation terminated.
+In file included from 
+D:/msys64/ucrt64/include/c++/15.2.0/cstddef:52,
+                 from 
+D:/msys64/ucrt64/include/c++/15.2.0/bits/memory_resource.h:40,
+                 from 
+D:/msys64/ucrt64/include/c++/15.2.0/vector:91,
+                 from include/Board.h:2,
+                 from src\Board.cpp:1:
+D:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/15.2.0/include/std
+def.h:1:15: fatal error: stddef.h: No such file or directory
+    1 | #include_next <stddef.h>
+      |               ^~~~~~~~~~
+compilation terminated.

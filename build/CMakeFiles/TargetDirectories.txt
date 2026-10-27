@@ -1,0 +1,3 @@
+/mnt/d/Pradeep proj/Online-Tic-Tac-Toe/build/CMakeFiles/lan_tictactoe.dir
+/mnt/d/Pradeep proj/Online-Tic-Tac-Toe/build/CMakeFiles/edit_cache.dir
+/mnt/d/Pradeep proj/Online-Tic-Tac-Toe/build/CMakeFiles/rebuild_cache.dir

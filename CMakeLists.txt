@@ -1,23 +1,40 @@
-cmake_minimum_required(VERSION 3.15)
-project(TicTacToeMultiplayer)
+cmake_minimum_required(VERSION 3.10)
+project(lan_tictactoe CXX)
 
-# Enforce modern C++ standards
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Locate SQLite3 on the host machine
-find_package(SQLite3 REQUIRED)
+# Find required system packages
+find_package(Threads REQUIRED)
+find_package(PkgConfig REQUIRED)
 
-# Define ALL the source files for the backend executable
-add_executable(Server
-    backend/main.cpp
-    backend/Database.cpp
-    backend/Board.cpp
-    backend/Player.cpp
-    backend/GameSession.cpp
-    backend/User.cpp
-    backend/Auth.cpp
+# Use pkg-config to locate libpqxx installed via apt
+pkg_check_modules(PQXX REQUIRED libpqxx)
+
+# Include directories pointing to your third_party paths
+include_directories(
+    include
+    third_party/Crow/include
+    third_party/asio/include
+    ${PQXX_INCLUDE_DIRS}
 )
 
-# Link the SQLite3 library and standard threading
-target_link_libraries(Server SQLite::SQLite3 pthread)
+link_directories(${PQXX_LIBRARY_DIRS})
+
+# Collect source files
+file(GLOB SOURCES "src/*.cpp")
+
+# Create executable
+add_executable(lan_tictactoe ${SOURCES})
+
+# Define a macro so Database.cpp knows libpqxx is available
+if(PQXX_FOUND)
+    target_compile_definitions(lan_tictactoe PRIVATE USE_PQXX HAVE_LIBPQXX)
+endif()
+
+# Link libraries
+target_link_libraries(lan_tictactoe 
+    PRIVATE 
+    ${PQXX_LIBRARIES} 
+    Threads::Threads
+)
